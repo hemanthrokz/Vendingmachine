@@ -2,7 +2,7 @@ package Entity;
 
 import java.util.*;
 
-public class Inventry {
+public class Inventry { ///US EPRIVATE FIELDS   //BUILDER PATTERNS
     String name;
     int productid;
     int productinventrycount;

@@ -3,7 +3,7 @@ package Entity;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Process extends Inventry {
+public class Process extends Inventry {  //CLASS SPECIFIC METHODS AND FIELDS IN PRIVATE
 
      static double initialBalanceamount = 100;
     static double balanceamountinmachine = 0;
@@ -11,7 +11,7 @@ public class Process extends Inventry {
     static double changeamt;
     static int denomi=0;
     static int addinv=0;
-    public static int InvSelect() throws UnavialableProduct {
+    public static int InvSelect() throws UnavialableProduct {//NO NEED USE THROWS FOR  RUNTIMEEXCEPTION
 
         System.out.println(" Enter productId to select the product = ");
 
@@ -19,13 +19,16 @@ public class Process extends Inventry {
          invselectvalue = inventryselect.nextInt();
          if (invselectvalue>2) {
              throw new UnavialableProduct("Selected productId must be 1 or 2");
-         }else {
+         }else {                    //AVOID SWITCH CASE MAKE USE OF
              switch (invselectvalue) {
                  case 1:
                      System.out.println("You have selected Coke ");
                      break;
                  case 2:
                      System.out.println("you have selected Pepsi ");
+                     break;
+                 case 3:
+                     System.out.println("you have selected MAZZA ");
                      break;
              }
          }
@@ -103,5 +106,33 @@ public class Process extends Inventry {
         }
 
         }
+    public void Inventry3Process(Map<Integer, Inventry> product ,Inventry inventry3,double incash) throws InsufficientBalance,InsufficientCash {
+        if(inventry3.productinventrycount <=0) {  //adding item to inventry
+            System.out.println("Sorry item unavialiable ,adding item to inventry try again sometime");
+            addInventrycountUpdate(product, inventry3, invselectvalue);
+        }
+        else if(inventry3.productinventrycount >0)
+        {
+            if (incash == inventry3.productprice) {
+                System.out.println("Updated balance amount in machine = " + initialBalanceamount);
+                System.out.println(" here is your coke,thank you visit again ");
+                InventrycountUpdate( product ,inventry3,invselectvalue) ;
+            } else if (incash > inventry3.productprice) {
+
+                System.out.println(" your balance change = " + balanceChange(incash, inventry3.productprice));
+                if (balanceamountinmachine<0) {
+                    throw new InsufficientBalance("Insufficient Balance in the machine to provide balance change ,so insert exact change to purchase the product ");
+                }else {
+                    System.out.println("Updated balance amount in machine = " + balanceamountinmachine);
+                    System.out.println(" here is your coke,thank you visit again ");
+                    InventrycountUpdate(product, inventry3, invselectvalue);
+                }
+            } else if (incash < inventry3.productprice) {
+                throw new InsufficientCash("insufficiant amount entered for the product ");
+                //System.out.println("insufficiant amount entered for the product ");
+            }
+        }
+
+    }
     }
 

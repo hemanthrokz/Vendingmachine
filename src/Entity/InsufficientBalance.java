@@ -1,6 +1,6 @@
 package Entity;
 
-public class InsufficientBalance extends Exception {
+public class InsufficientBalance extends RuntimeException {
     InsufficientBalance(String message){
         super(message);
     }

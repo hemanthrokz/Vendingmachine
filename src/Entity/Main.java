@@ -9,17 +9,18 @@ public static void incashAmount(){
     System.out.println("enter the cash amount to purchase ");
     incash = input_cash.nextDouble();
 }
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws RuntimeException {
       //  initialBalanceamount = 100;
 
         Inventry inventry1 = new Inventry("coke", 1, 3, 3.0);
-        Inventry inventry2 = new Inventry("pepsi", 2, 10, 2.0);
-
+        Inventry inventry2 = new Inventry("pepsi", 2, 7, 2.0);
+        Inventry inventry3 = new Inventry("mazza", 3, 4, 5.0);
 
 
         HashMap<Integer, Inventry> product = new HashMap<Integer, Inventry>();
         product.put(1,inventry1);
         product.put(2,inventry2);
+        product.put(3,inventry3);
 
         Process ms=new Process();
         while (true) {
@@ -44,9 +45,7 @@ public static void incashAmount(){
                     } catch (Exception e) {
                         System.out.println("a problem occured "+ e);;
                     }
-
-
-                }
+                  }
                 else {
                     System.out.println("Sorry item unavialiable ,adding item to inventry try again sometime");
                     ms.addInventrycountUpdate(product, inventry1, invselectvalue);
@@ -61,14 +60,27 @@ public static void incashAmount(){
                     } catch (Exception e) {
                         System.out.println("a problem occured "+ e);;
                     }
-
-                }
+                  }
                 else {
                     System.out.println("Sorry item unavialiable ,adding item to inventry try again sometime");
                     ms.addInventrycountUpdate(product, inventry2, invselectvalue);
                 }
             }
-
+            // for inventry value 3
+            else if (invselectvalue == 3 ) {
+                if (inventry3.productinventrycount>0) {
+                    incashAmount();
+                    try {
+                        ms.Inventry3Process(product, inventry3, incash);
+                    } catch (Exception e) {
+                        System.out.println("a problem occured "+ e);;
+                    }
+                }
+                else {
+                    System.out.println("Sorry item unavialiable ,adding item to inventry try again sometime");
+                    ms.addInventrycountUpdate(product, inventry3, invselectvalue);
+                }
+            }
         }
 
     }
