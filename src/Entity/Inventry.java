@@ -3,17 +3,16 @@ package Entity;
 import java.util.*;
 
 public class Inventry { ///US EPRIVATE FIELDS   //BUILDER PATTERNS
-    String name;
-    int productid;
-    int productinventrycount;
-    Double productprice;
+   private String name;
+    private int productid;
+    private int productinventrycount;
+    private Double productprice;
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public void setProductid(int productid) {
-        this.productid = productid;
+
+
+    public Double getProductprice() {
+        return productprice;
     }
 
     public boolean setProductinventrycount(int productinventrycount) {

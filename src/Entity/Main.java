@@ -3,13 +3,13 @@ package Entity;
 import java.util.*;
 
 public class Main extends Process {
-   public static double incash=0;
+   public static double INCASH =0;
 public static void incashAmount(){
     Scanner input_cash = new Scanner(System.in);
     System.out.println("enter the cash amount to purchase ");
-    incash = input_cash.nextDouble();
+    INCASH = input_cash.nextDouble();
 }
-    public static void main(String[] args) throws RuntimeException {
+    public static void main(String[] args) {
       //  initialBalanceamount = 100;
 
         Inventry inventry1 = new Inventry("coke", 1, 3, 3.0);
@@ -31,54 +31,54 @@ public static void incashAmount(){
             }
             //inventery select
             try {
-                int invselectvalue = InvSelect();
+               invSelect(product);
             } catch (Exception e) {
-                System.out.println("a problem occured "+ e);;
+                System.out.println("a problem occured "+ e);
             }
 
             // for inventry value 1
-            if (invselectvalue == 1  ) {
-                if (inventry1.productinventrycount>0) {
+            if (INVSELECT_VAL == 1  ) {
+                if (inventry1.getProductinventrycount()>0) {
                     incashAmount();
                     try {
-                        ms.Inventry1Process(product, inventry1, incash);
+                        ms.inventry1Process(product, inventry1, INCASH);
                     } catch (Exception e) {
-                        System.out.println("a problem occured "+ e);;
+                        System.out.println("a problem occured "+ e);
                     }
                   }
                 else {
                     System.out.println("Sorry item unavialiable ,adding item to inventry try again sometime");
-                    ms.addInventrycountUpdate(product, inventry1, invselectvalue);
+                    ms.addInventryCountUpdate(product, inventry1, INVSELECT_VAL);
                 }
             }
             // for inventry value 2
-            else if (invselectvalue == 2 ) {
-                if (inventry2.productinventrycount>0) {
+            else if (INVSELECT_VAL == 2 ) {
+                if (inventry2.getProductinventrycount()>0) {
                     incashAmount();
                     try {
-                        ms.Inventry2Process(product, inventry2, incash);
+                        ms.inventry2Process(product, inventry2, INCASH);
                     } catch (Exception e) {
-                        System.out.println("a problem occured "+ e);;
+                        System.out.println("a problem occured "+ e);
                     }
                   }
                 else {
                     System.out.println("Sorry item unavialiable ,adding item to inventry try again sometime");
-                    ms.addInventrycountUpdate(product, inventry2, invselectvalue);
+                    ms.addInventryCountUpdate(product, inventry2, INVSELECT_VAL);
                 }
             }
             // for inventry value 3
-            else if (invselectvalue == 3 ) {
-                if (inventry3.productinventrycount>0) {
+            else if (INVSELECT_VAL == 3 ) {
+                if (inventry3.getProductinventrycount()>0) {
                     incashAmount();
                     try {
-                        ms.Inventry3Process(product, inventry3, incash);
+                        ms.inventry3Process(product, inventry3, INCASH);
                     } catch (Exception e) {
-                        System.out.println("a problem occured "+ e);;
+                        System.out.println("a problem occured "+ e);
                     }
                 }
                 else {
                     System.out.println("Sorry item unavialiable ,adding item to inventry try again sometime");
-                    ms.addInventrycountUpdate(product, inventry3, invselectvalue);
+                    ms.addInventryCountUpdate(product, inventry3, INVSELECT_VAL);
                 }
             }
         }
