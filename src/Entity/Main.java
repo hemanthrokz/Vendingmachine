@@ -2,66 +2,101 @@ package Entity;
 
 import java.util.*;
 
-public class Main extends Process {
-    public static double INCASH =0;
+public class Main  {
+    public static double INCASH;
     public static void incashAmount(){
         Scanner input_cash = new Scanner(System.in);
         System.out.println("enter the cash amount to purchase ");
         INCASH = input_cash.nextDouble();
     }
     public static void main(String[] args) {
-
-        HashMap<Integer, Inventry> product = new HashMap<Integer, Inventry>();
-        product.put(1,new Inventry("coke", 1, 3, 3.0));
-        product.put(2,new Inventry("pepsi", 2, 7, 2.0));
-        product.put(3,new Inventry("mazza", 3, 4, 5.0));
-
-        Inventry p1=product.get(1);
-        Inventry p2=product.get(2);
-        Inventry p3=product.get(3);
+    AdminProcess ap=new AdminProcess();
+    Process process=new Process();
+        Inventry p1=ap.getProduct().get(1);
+        Inventry p2=ap.getProduct().get(2);
+        Inventry p3=ap.getProduct().get(3);
         Process ms=new Process();
         while (true) {
 
-            System.out.println("list of products avialiable = ");
-            for (Integer key: product.keySet()){
-                System.out.println(key+ " = " + product.get(key));
-            }
-            //inventery select
-            try {
-                invSelect(product);
-            } catch (Exception e) {
-                System.out.println("a problem occured "+ e);
-            }
-                if (INVSELECT_VAL == 1 && product.get(1).getProductinventrycount()>0) {
-                    incashAmount();
-                    try {
-                        ms.inventryProcess(product, p1, INCASH);
-                    } catch (RuntimeException e) {
-                        System.out.println("a problem occured "+ e);
-                    }
-                }
-                else if (INVSELECT_VAL == 2 && product.get(2).getProductinventrycount()>0) {
-                    incashAmount();
-                    try {
-                        ms.inventryProcess(product, p2, INCASH);
-                    } catch (RuntimeException e) {
-                        System.out.println("a problem occured "+ e);
-                    }
-                }
-                  else if (INVSELECT_VAL == 3  && product.get(3).getProductinventrycount()>0) {
-                        incashAmount();
-                        try {
-                            ms.inventryProcess(product, p3, INCASH);
-                        } catch (RuntimeException e) {
-                            System.out.println("a problem occured "+ e);
-                        }
-                    }
-                else {
-                    System.out.println("Sorry item unavialiable ,adding item to inventry try again sometime");
-                   // ms.addInventryCountUpdate(product, p1, INVSELECT_VAL);
-                }
-            }
 
+            Scanner adminProcess = new Scanner(System.in);
+            System.out.println("enter 1 to login as admin or enter 2 to continue as coustomer");
+            int choice = adminProcess.nextInt();
+
+            if (choice == 1) {
+
+                if (ap.adminValidator()==true)
+                {
+                ap.adminOptions();
+                int adminCase = adminProcess.nextInt();
+                switch (adminCase) {
+                    case 1:
+                        ap.addNewProduct(ap);
+                        break;
+                    case 2:
+                        ap.removeProduct(ap);
+                        break;
+                    default:
+                        System.out.println("************* invalid input *************");
+
+                }
+
+                }
+                else{
+                    System.out.println("******************* Incorrect password *****************");
+                }
+            } else if (choice == 2) {
+
+
+                System.out.println("Logged in as Customer \n ****************** list of products avialiable *******************\n");
+                for (Integer key : ap.getProduct().keySet()) {
+                    System.out.println(key + " = " + ap.getProduct().get(key));
+                }
+                try {                                                            //inventery select
+                    process.invSelect(ap.getProduct());
+                } catch (Exception e) {
+                    System.out.println("a problem occured " + e);
+                }
+                //////////////////////////////////////////////////////
+                if (ap.getProduct().get(process.INVSELECT_VAL).getProductinventrycount() > 0) {
+                    incashAmount();
+                    try {
+                        ms.inventryProcess(ap.getProduct(), ap.getProduct().get(process.INVSELECT_VAL), INCASH);
+                    } catch (RuntimeException e) {
+                        System.out.println("a problem occured " + e);
+                    }
+                }
+                //////////////////////////////////////////////////////
+//                if (process.INVSELECT_VAL == 1 && ap.getProduct().get(1).getProductinventrycount() > 0) {
+//                    incashAmount();
+//                    try {
+//                        ms.inventryProcess(ap.getProduct(), p1, INCASH);
+//                    } catch (RuntimeException e) {
+//                        System.out.println("a problem occured " + e);
+//                    }
+//                } else if (process.INVSELECT_VAL == 2 && ap.getProduct().get(2).getProductinventrycount() > 0) {
+//                    incashAmount();
+//                    try {
+//                        ms.inventryProcess(ap.getProduct(), p2, INCASH);
+//                    } catch (RuntimeException e) {
+//                        System.out.println("a problem occured " + e);
+//                    }
+//                } else if (process.INVSELECT_VAL == 3 && ap.getProduct().get(3).getProductinventrycount() > 0) {
+//                    incashAmount();
+//                    try {
+//                        ms.inventryProcess(ap.getProduct(), p3, INCASH);
+//                    } catch (RuntimeException e) {
+//                        System.out.println("a problem occured " + e);
+//                    }
+//                }
+                else {
+                    throw new UnavialableProduct("\n Currently the selected product is unavailable ");
+                }
+            }
+                else{
+                System.out.println("Sorry invalid input entered");
+            }
+        }
         }
 
     }
