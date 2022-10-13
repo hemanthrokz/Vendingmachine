@@ -14,9 +14,9 @@ public class Inventry {
         return productprice;
     }
 
-    public boolean setProductinventrycount(int productinventrycount) {
+    public void setProductinventrycount(int productinventrycount) {
         this.productinventrycount = productinventrycount;
-        return true;
+
     }
 
     public String getName() {
