@@ -2,19 +2,12 @@ package Entity;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Process {  //CLASS SPECIFIC METHODS AND FIELDS IN PRIVATE
 
     Scanner balance=new Scanner(System.in);
-
-
-
-
-    static int invSelect(HashMap<Integer, Inventry> product,int INVSELECT_VAL) {//NO NEED USE THROWS FOR  RUNTIMEEXCEPTION
-
-
+    public static int invSelect(HashMap<Integer, Inventry> product,int INVSELECT_VAL) {//NO NEED USE THROWS FOR  RUNTIMEEXCEPTION
         try {
             if (product.containsKey(INVSELECT_VAL)){
                 System.out.println("u have selected "+product.get(INVSELECT_VAL).getName() );
