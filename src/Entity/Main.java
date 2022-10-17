@@ -15,9 +15,7 @@ public class Main  {
         AdminProcess ap = new AdminProcess();
         Process process = new Process();
 
-
-
-        Process ms = new Process();
+     Process ms = new Process();
         while (true) {
 
 
@@ -32,15 +30,18 @@ public class Main  {
                     int adminCase = adminProcess.nextInt();
                     switch (adminCase) {
                         case 1:
-                            ap.addNewProductOrUpdate();
+                            ap.productListView();
                             break;
                         case 2:
-                            ap.removeProduct();
+                            ap.addNewProductOrUpdate();
                             break;
                         case 3:
-                            process.addMachineBalance(ap);
+                            ap.removeProduct();
                             break;
                         case 4:
+                            process.addMachineBalance(ap);
+                            break;
+                        case 5:
                             ap.inventryProductCountAdd();
                             break;
                         default:

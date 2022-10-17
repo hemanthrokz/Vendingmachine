@@ -61,6 +61,13 @@ public class AdminProcess {
         }
 
     }
+    public void productListView() {
+        System.out.println(" ****************** list of products avialiable *******************");
+        for (Integer key : this.getProduct().keySet()) {
+            System.out.println(key + " = " + this.getProduct().get(key));
+        }
+
+    }
     public void addNewProductOrUpdate(){                                     ///inventey admin process
         System.out.println("Enter details of new product to be added to inventry : ");
         System.out.println("Enter productCode : ");
@@ -90,6 +97,6 @@ public class AdminProcess {
             return false;
     }
     public void adminOptions(){
-        System.out.println("Enter 1 ------> Add new product to inventry \n  Enter 2 ------> Remove existing product from inventry \n   Enter 3 ------> To update balance inventy amount \n    Enter 4 ------> To update product inventry count " );
+        System.out.println("Enter 1 ------> To view the list of product in the inventry \n  Enter 2 ------> Add new product to inventry \n   Enter 3 ------> Remove existing product from inventry \n    Enter 4 ------> To update balance inventy amount \n     Enter 5 ------> To update product inventry count " );
     }
 }
